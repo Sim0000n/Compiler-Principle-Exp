@@ -322,6 +322,9 @@ void yyfree ( void *  );
 #define YY_AT_BOL() (YY_CURRENT_BUFFER_LVALUE->yy_at_bol)
 
 /* Begin user sect3 */
+
+#define yywrap() (/*CONSTCOND*/1)
+#define YY_SKIP_YYWRAP
 typedef flex_uint8_t YY_CHAR;
 
 FILE *yyin = NULL, *yyout = NULL;
@@ -446,9 +449,10 @@ char *yytext;
 #include <cstdio>
 
 #include "snazzle.tab.h"  // to get the token types from Bison
+extern int yylex();
 
-#line 451 "lex.yy.c"
-#line 452 "lex.yy.c"
+#line 455 "lex.yy.c"
+#line 456 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -665,9 +669,9 @@ YY_DECL
 		}
 
 	{
-#line 7 "snazzle.l"
+#line 9 "snazzle.l"
 
-#line 671 "lex.yy.c"
+#line 675 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -727,22 +731,22 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 8 "snazzle.l"
+#line 10 "snazzle.l"
 ;
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 9 "snazzle.l"
+#line 11 "snazzle.l"
 { yylval.fval = atof(yytext); return FLOAT; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 10 "snazzle.l"
+#line 12 "snazzle.l"
 { yylval.ival = atoi(yytext); return INT; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 11 "snazzle.l"
+#line 13 "snazzle.l"
 {
 	// We have to strdup because we can't rely on yytext not changing underneath us:
 	yylval.sval = strdup(yytext);
@@ -751,10 +755,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 16 "snazzle.l"
+#line 18 "snazzle.l"
 ECHO;
 	YY_BREAK
-#line 758 "lex.yy.c"
+#line 762 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1759,6 +1763,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 16 "snazzle.l"
+#line 18 "snazzle.l"
 
 

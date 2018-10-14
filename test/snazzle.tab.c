@@ -62,7 +62,7 @@
 
 
 /* Copy the first part of user declarations.  */
-#line 1 "snazzle.y" /* yacc.c:339  */
+#line 2 "snazzle.y" /* yacc.c:339  */
 
 #include <cstdio>
 #include <iostream>
@@ -121,7 +121,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 19 "snazzle.y" /* yacc.c:355  */
+#line 20 "snazzle.y" /* yacc.c:355  */
 
 	int ival;
 	float fval;
@@ -442,7 +442,7 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    36,    36,    37,    38,    39,    40,    41
+       0,    37,    37,    38,    39,    40,    41,    42
 };
 #endif
 
@@ -1208,37 +1208,37 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 36 "snazzle.y" /* yacc.c:1646  */
+#line 37 "snazzle.y" /* yacc.c:1646  */
     { cout << "bison found an int: " << (yyvsp[-1].ival) << endl; }
 #line 1214 "snazzle.tab.c" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 37 "snazzle.y" /* yacc.c:1646  */
+#line 38 "snazzle.y" /* yacc.c:1646  */
     { cout << "bison found a float: " << (yyvsp[-1].fval) << endl; }
 #line 1220 "snazzle.tab.c" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 38 "snazzle.y" /* yacc.c:1646  */
+#line 39 "snazzle.y" /* yacc.c:1646  */
     { cout << "bison found a string: " << (yyvsp[-1].sval) << endl; }
 #line 1226 "snazzle.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 39 "snazzle.y" /* yacc.c:1646  */
+#line 40 "snazzle.y" /* yacc.c:1646  */
     { cout << "bison found an int: " << (yyvsp[0].ival) << endl; }
 #line 1232 "snazzle.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 40 "snazzle.y" /* yacc.c:1646  */
+#line 41 "snazzle.y" /* yacc.c:1646  */
     { cout << "bison found a float: " << (yyvsp[0].fval) << endl; }
 #line 1238 "snazzle.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 41 "snazzle.y" /* yacc.c:1646  */
+#line 42 "snazzle.y" /* yacc.c:1646  */
     { cout << "bison found a string: " << (yyvsp[0].sval) << endl; }
 #line 1244 "snazzle.tab.c" /* yacc.c:1646  */
     break;
@@ -1472,7 +1472,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 43 "snazzle.y" /* yacc.c:1906  */
+#line 44 "snazzle.y" /* yacc.c:1906  */
 
 
 int main(int, char**) {

@@ -2,8 +2,10 @@
 #include <cstdio>
 
 #include "snazzle.tab.h"  // to get the token types from Bison
+extern int yylex();
 
 %}
+%option noyywrap
 %%
 [ \t\n]           ;
 [0-9]+\.[0-9]+    { yylval.fval = atof(yytext); return FLOAT; }
