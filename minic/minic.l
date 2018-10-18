@@ -1,5 +1,5 @@
 %{
-#include "parser.tab.h"
+#include "minic.tab.h"
 #include "string.h"
 #include "def.h"
 int yycolumn=1;
@@ -21,10 +21,10 @@ int    [0-9]+
 float  ([0-9]*\.[0-9]+)|([0-9]+\.)
 
 %%
-{int}        {yylval.type_int=atoi(yytext); return INT;}
-{float}      {yylval.type_float=atof(yytext); return FLOAT;}
-"int"        {strcpy(yylval.type_id,  yytext); return TYPE;}
-"float"      {strcpy(yylval.type_id,  yytext); return TYPE;}
+{int}        { yylval.type_int=atoi(yytext); return INT; }
+{float}      { yylval.type_float=atof(yytext); return FLOAT; }
+"int"        { strcpy(yylval.type_id,  yytext); return TYPE; }
+"float"      { strcpy(yylval.type_id,  yytext); return TYPE; }
 
 "return"     { return RETURN; }
 "if"         { return IF; }
@@ -35,22 +35,21 @@ float  ([0-9]*\.[0-9]+)|([0-9]+\.)
 ";"			{ return SEMI; }
 ","			{ return COMMA; }
 ">"|"<"|">="|"<="|"=="|"!=" { strcpy(yylval.type_id, yytext);;return RELOP; }
-"="			{return ASSIGNOP;}
-"+"			{return PLUS;}
-"-"			{return MINUS;}
-"*"			{return STAR;}
-"/"			{return DIV;}
-"&&"         {return AND;}
-"||"            {return OR;}
-"!"			{return NOT;}
-"("			{return LP;}
-")"			{return RP;}
-"{"			{return LC;}
-"}"			{return RC;}
-[\n]           {yycolumn=1;}   
+"="			{ return ASSIGNOP; }
+"+"			{ return PLUS; }
+"-"			{ return MINUS; }
+"*"			{ return STAR; }
+"/"			{ return DIV; }
+"&&"        { return AND; }
+"||"        { return OR; }
+"!"			{ return NOT; }
+"("			{ return LP; }
+")"			{ return RP; }
+"{"			{ return LC; }
+"}"			{ return RC; }
+[\n]        { yycolumn=1; }   
 [ \r\t]          {}   
-.			{printf("Error type A :Mysterious character \"%s\"\n\t at Line %d\n",yytext,yylineno);}
-/*作为实验内容，还需要考虑识别出2种形式的注释注释部分时，直接舍弃 */
+.			{ printf("Error type A :Mysterious character \"%s\"\n\t at Line %d\n",yytext,yylineno); }
 %%
 
 /* 和bison联用时，不需要这部分
@@ -63,5 +62,5 @@ return 0;
 */
 int yywrap()
 {
-return 1;
+	return 1;
 }
