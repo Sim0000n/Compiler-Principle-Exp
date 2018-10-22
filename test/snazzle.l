@@ -1,6 +1,15 @@
 %{
+<<<<<<< HEAD
 #include "snazzle.tab.h"
+=======
+#include <cstdio>
+
+#include "snazzle.tab.h"  // to get the token types from Bison
+extern int yylex();
+
+>>>>>>> 4e41c277c9a5ef06dcd280ce3bb4dce5308102e7
 %}
+%option noyywrap
 %%
 [ \t\n] ;
 sNaZZle        { return SNAZZLE; }
