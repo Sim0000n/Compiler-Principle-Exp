@@ -36,6 +36,8 @@ float  ([0-9]*\.[0-9]+)|([0-9]+\.)
 ","			{ return COMMA; }
 "--" 		{ return MINUSONE; }
 "++"		{ return PLUSONE; }
+"//".		{  }
+"/*"(.|\n)"*/"		{  }
 ">"|"<"|">="|"<="|"=="|"!=" { strcpy(yylval.type_id, yytext);;return RELOP; }
 "="			{ return ASSIGNOP; }
 "+"			{ return PLUS; }
