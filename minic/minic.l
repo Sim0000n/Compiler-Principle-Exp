@@ -19,10 +19,12 @@ typedef union {
 id   [A-Za-z][A-Za-z0-9]*  
 int    [0-9]+
 float  ([0-9]*\.[0-9]+)|([0-9]+\.)
+comment (\/\*(.|\n)*\*\/)|(\/\/.*)
 
 %%
 {int}        { yylval.type_int=atoi(yytext); return INT; }
 {float}      { yylval.type_float=atof(yytext); return FLOAT; }
+{comment}	 { printf("Comment"); }
 "int"        { strcpy(yylval.type_id,  yytext); return TYPE; }
 "float"      { strcpy(yylval.type_id,  yytext); return TYPE; }
 
@@ -36,8 +38,6 @@ float  ([0-9]*\.[0-9]+)|([0-9]+\.)
 ","			{ return COMMA; }
 "--" 		{ return MINUSONE; }
 "++"		{ return PLUSONE; }
-"//".		{  }
-"/*"(.|\n)"*/"		{  }
 ">"|"<"|">="|"<="|"=="|"!=" { strcpy(yylval.type_id, yytext);;return RELOP; }
 "="			{ return ASSIGNOP; }
 "+"			{ return PLUS; }
