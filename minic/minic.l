@@ -24,7 +24,7 @@ comment (\/\*(.|\n)*\*\/)|(\/\/.*)
 %%
 {int}        { yylval.type_int=atoi(yytext); return INT; }
 {float}      { yylval.type_float=atof(yytext); return FLOAT; }
-{comment}	 { printf("Comment"); }
+{comment}	 {  }
 "int"        { strcpy(yylval.type_id,  yytext); return TYPE; }
 "float"      { strcpy(yylval.type_id,  yytext); return TYPE; }
 
@@ -49,6 +49,8 @@ comment (\/\*(.|\n)*\*\/)|(\/\/.*)
 "!"			{ return NOT; }
 "("			{ return LP; }
 ")"			{ return RP; }
+"["			{ return LS; }
+"]"			{ return RS; }
 "{"			{ return LC; }
 "}"			{ return RC; }
 "%"			{ return MOD; }

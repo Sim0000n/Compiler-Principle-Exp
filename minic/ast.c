@@ -43,8 +43,15 @@ void display(struct node *T,int indent)  {//对抽象语法树的先根遍历
 	case PARAM_LIST:    display(T->ptr[0],indent);     //依次显示全部参数类型和名称，
                         display(T->ptr[1],indent);
                         break;
-	case PARAM_DEC:     printf("%*c类型：%s, 参数名：%s\n", indent,' ',  \
-                               T->ptr[0]->type==INT?"int": "float",T->ptr[1]->type_id);
+	case PARAM_DEC:     if(T->ptr[1]->ptr[0]){
+                            printf("%*c数组类型：%s, 参数名：%s, 数组大小： %d \n", indent, ' ', \
+                            T->ptr[0]->type==INT?"int": "float", T->ptr[1]->type_id, T->ptr[1]->ptr[0]->type_int);
+                        }
+                        else{
+                                printf("%*c类型：%s, 参数名：%s \n", indent,' ',  \
+                                T->ptr[0]->type==INT?"int": "float",T->ptr[1]->type_id);
+
+                        }
                         break;
 	case EXP_STMT:      printf("%*c表达式语句：\n",indent,' ');
                         display(T->ptr[0],indent+3);
@@ -104,6 +111,9 @@ void display(struct node *T,int indent)  {//对抽象语法树的先根遍历
                         break;
 	case ID:	        printf("%*cID： %s\n",indent,' ',T->type_id);
                         break;
+    case ARRAY_ID:      printf("%*cARRAY_ID:  %s\n",indent,' ',T->type_id);
+                        display(T->ptr[0],indent);
+                        break;
 	case INT:	        printf("%*cINT：%d\n",indent,' ',T->type_int);
                         break;
 	case FLOAT:	        printf("%*cFLAOT：%f\n",indent,' ',T->type_float);
@@ -142,6 +152,7 @@ void display(struct node *T,int indent)  {//对抽象语法树的先根遍历
   //                  display(T,indent+3);
                     printf("\n");
                     break;
+    case ARRAY_INDEX:   printf("%*cARRAY_INDEX：%d \n",indent,' ',T->type_int);
          }
       }
 }

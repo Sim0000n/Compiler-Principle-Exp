@@ -1,10 +1,11 @@
+int x[4];
 int a,b,c;
 float m,n;
-int fibo(int a, int b){
+int fibo(int a[2], int b){
     if(a==1 || a==2){
         return 1;
     }
-    return fibo(a-1) + fibo(a - 2);
+    return fibo(a) + fibo(a - 2);
 }
 int main(){
     int m,n,i;

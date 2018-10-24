@@ -52,30 +52,32 @@ extern int yydebug;
     FLOAT = 262,
     LP = 263,
     RP = 264,
-    LC = 265,
-    RC = 266,
-    SEMI = 267,
-    COMMA = 268,
-    COMMENT = 269,
-    LCOM = 270,
-    RCOM = 271,
-    PLUS = 272,
-    MINUS = 273,
-    STAR = 274,
-    DIV = 275,
-    ASSIGNOP = 276,
-    AND = 277,
-    OR = 278,
-    NOT = 279,
-    IF = 280,
-    ELSE = 281,
-    WHILE = 282,
-    RETURN = 283,
-    PLUSONE = 284,
-    MINUSONE = 285,
-    MOD = 286,
-    UMINUS = 287,
-    LOWER_THEN_ELSE = 288
+    LS = 265,
+    RS = 266,
+    LC = 267,
+    RC = 268,
+    SEMI = 269,
+    COMMA = 270,
+    COMMENT = 271,
+    LCOM = 272,
+    RCOM = 273,
+    PLUS = 274,
+    MINUS = 275,
+    STAR = 276,
+    DIV = 277,
+    ASSIGNOP = 278,
+    AND = 279,
+    OR = 280,
+    NOT = 281,
+    IF = 282,
+    ELSE = 283,
+    WHILE = 284,
+    RETURN = 285,
+    PLUSONE = 286,
+    MINUSONE = 287,
+    MOD = 288,
+    UMINUS = 289,
+    LOWER_THEN_ELSE = 290
   };
 #endif
 
@@ -91,7 +93,7 @@ union YYSTYPE
 	char   type_id[32];
 	struct node *ptr;
 
-#line 95 "minic.tab.h" /* yacc.c:1909  */
+#line 97 "minic.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
