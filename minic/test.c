@@ -1,3 +1,4 @@
+
 int x[4];
 int a,b,c;
 float m,n;
@@ -9,13 +10,12 @@ int fibo(int a[2], int b){
 }
 int main(){
     int m,n,i;
-    m = read();
     i = 1;
     while(i <= m){
         n = fibo(i);
         write(n);
         i++;
-	i = i % i ;
+	i = x[3] ;
     }
     return 1;
 }

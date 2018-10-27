@@ -45,8 +45,6 @@ void display(struct node *T,int indent)  {//对抽象语法树的先根遍历
                         break;
 	case PARAM_DEC:     if(T->ptr[1]->ptr[0]){
                             printf("%*c数组类型：%s, 参数名：%s, 数组大小： %d \n", indent, ' ', \
-                            T->ptr[0]->type==INT?"int": "float", T->ptr[1]->type_id, T->ptr[1]->ptr[0]->type_int);
-                        }
                         else{
                                 printf("%*c类型：%s, 参数名：%s \n", indent,' ',  \
                                 T->ptr[0]->type==INT?"int": "float",T->ptr[1]->type_id);
