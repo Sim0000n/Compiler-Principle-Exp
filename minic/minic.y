@@ -45,7 +45,7 @@ void display(struct node *,int);
 
 program: ExtDefList    { 
         display($1,0);  
-      //  semantic_Analysis0($1);
+        semantic_Analysis0($1);
         }     /*显示语法树,语义分析 */
 
          ; 

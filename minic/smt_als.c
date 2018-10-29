@@ -11,21 +11,21 @@ char *strcat0(char *s1,char *s2) {
 char *newAlias() {
     static int no=1;
     char s[10];
-    itoa(no++,s,10);
+    printf(s,"%d",no++);
     return strcat0("v",s);
 }
 
 char *newLabel() {
     static int no=1;
     char s[10];
-    itoa(no++,s,10);
+    printf(s,"%d",no++);
     return strcat0("label",s);
 }
 
 char *newTemp(){
     static int no=1;
     char s[10];
-    itoa(no++,s,10);
+    printf(s,"%d",no++);
     return strcat0("temp",s);
 }
 
@@ -758,5 +758,5 @@ void semantic_Analysis0(struct node *T) {
     symbol_scope_TX.top=1;
     T->offset=0;              //外部变量在数据区的偏移量
     semantic_Analysis(T);
-    objectCode(T->code);
+    //objectCode(T->code);
  } 

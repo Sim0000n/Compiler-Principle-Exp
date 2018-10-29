@@ -1465,7 +1465,7 @@ yyreduce:
 #line 46 "minic.y" /* yacc.c:1646  */
     { 
         display((yyvsp[0].ptr),0);  
-      //  semantic_Analysis0($1);
+        semantic_Analysis0((yyvsp[0].ptr));
         }
 #line 1471 "minic.tab.c" /* yacc.c:1646  */
     break;
