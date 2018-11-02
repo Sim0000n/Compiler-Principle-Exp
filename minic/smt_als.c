@@ -22,7 +22,7 @@ char *newAlias()
 {
     static int no = 1;
     char s[10];
-    printf(s, "%d", no++);
+    sprintf(s, "%d", no++);
     return strcat0("v", s);
 }
 
@@ -30,7 +30,7 @@ char *newLabel()
 {
     static int no = 1;
     char s[10];
-    printf(s, "%d", no++);
+    sprintf(s, "%d", no++);
     return strcat0("label", s);
 }
 
@@ -38,7 +38,7 @@ char *newTemp()
 {
     static int no = 1;
     char s[10];
-    printf(s, "%d", no++);
+    sprintf(s, "%d", no++);
     return strcat0("temp", s);
 }
 
@@ -490,7 +490,7 @@ void Exp(struct node *T)
             T->width = 4;
             break;
         case ASSIGNOP:
-            if (T->ptr[0]->kind != ID && T->ptr[0]->kind != ARRAY_ID)
+            if (T->ptr[0]->kind != ID && T->ptr[0]->kind != ARRAY)
             {
                 semantic_error(T->pos, "", "赋值语句需要左值");
             }
@@ -499,6 +499,11 @@ void Exp(struct node *T)
                 Exp(T->ptr[0]);
                 T->ptr[1]->offset = T->offset;
                 Exp(T->ptr[1]);
+                if(T->ptr[1] == ARRAY_DEC){
+                    if( T->ptr[1]->ptr[0]->ptr[0]->type != T->ptr[0]->type)
+                        semantic_error(T->pos,T->type_id,"类型不匹配");
+                     
+                }
                 
                 if(T->ptr[0]->type != T->ptr[1]->type)
                 {
@@ -861,14 +866,12 @@ void semantic_Analysis(struct node *T)
                 else if(T0->ptr[0]->kind == ARRAY_ID)
                 {
                     T0->ptr[0]->array = 1;
-                    rtn = fillSymbolTable(T0->ptr[0]->type_id, newAlias(), LEV, T0->ptr[0]->type, 'V', T->offset + T->width, 1);
+                    int tmp_offset = 4 * T0->ptr[0]->ptr[0]->type_int; 
+                    printf("%d\n", tmp_offset);
+                    rtn = fillSymbolTable(T0->ptr[0]->type_id, newAlias(), LEV, T0->ptr[0]->type, 'V', T->offset + tmp_offset, 1);
                     if(rtn == -1)
                     {
                         semantic_error(T0->ptr[0]->pos, T0->ptr[0]->type_id, "变量重复定义");
-                    }
-                    if(T0->ptr[0]->ptr[0]->type != INT)
-                    {
-                        semantic_error(T0->ptr[0]->pos,T0->ptr[0]->type_id, "长度类型非法");
                     }
                 }
                 else if (T0->ptr[0]->kind == ASSIGNOP)
