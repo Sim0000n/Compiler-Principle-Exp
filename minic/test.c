@@ -1,6 +1,7 @@
 int a,b,c;
 float m,n;
 int fibo(int a, int b){
+    a += b;
     if(a==1 || a==2){
         return 1;
     }

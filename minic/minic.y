@@ -25,9 +25,11 @@ void display(struct node *,int);
 %token <type_id> ID RELOP TYPE  //指定ID,RELOP 的语义值是type_id，有词法分析得到的标识符字符串
 %token <type_float> FLOAT         //指定ID的语义值是type_id，有词法分析得到的标识符字符串
 
+
 %token LP RP LS RS LC RC SEMI COMMA   //用bison对该文件编译时，带参数-d，生成的exp.tab.h中给这些单词进行编码，可在lex.l中包含parser.tab.h使用这些单词种类码
 %token COMMENT LCOM RCOM
 %token PLUS MINUS STAR DIV ASSIGNOP AND OR NOT IF ELSE WHILE RETURN PLUSONE MINUSONE MOD
+%token DMUL DPLUS DMIN DDIV
 
 %left ASSIGNOP
 %left OR
@@ -36,6 +38,7 @@ void display(struct node *,int);
 %left PLUS MINUS
 %left STAR DIV
 %left MOD
+%left DMUL DPLUS DMIN DDIV
 %right UMINUS NOT PLUSONE MINUSONE
 
 %nonassoc LOWER_THEN_ELSE
@@ -109,6 +112,10 @@ Exp:    Exp ASSIGNOP Exp {$$=mknode(ASSIGNOP,$1,$3,NULL,yylineno);strcpy($$->typ
       | Exp STAR Exp  {$$=mknode(STAR,$1,$3,NULL,yylineno);strcpy($$->type_id,"STAR");}
       | Exp DIV Exp   {$$=mknode(DIV,$1,$3,NULL,yylineno);strcpy($$->type_id,"DIV");}
       | Exp PLUSONE   {$$=mknode(PLUSONE,$1,NULL,NULL,yylineno);strcpy($$->type_id,"PLUSONE");}
+      | Exp DMUL Exp  {$$=mknode(DMUL,$1,$3,NULL,yylineno);strcpy($$->type_id,"DMUL");}
+      | Exp DPLUS Exp {$$=mknode(DPLUS,$1,$3,NULL,yylineno);strcpy($$->type_id,"DPLUS");}
+      | Exp DMIN Exp  {$$=mknode(DMIN,$1,$3,NULL,yylineno);strcpy($$->type_id,"DMIN");}
+      | Exp DDIV Exp  {$$=mknode(DDIV,$1,$3,NULL,yylineno);strcpy($$->type_id,"DDIV");}
       | PLUSONE Exp   {$$=mknode(PLUSONE,$2,NULL,NULL,yylineno);strcpy($$->type_id,"PLUSONE");}
       | Exp MINUSONE  {$$=mknode(MINUSONE,$1,NULL,NULL,yylineno);strcpy($$->type_id,"MINUSONE");}
       | MINUSONE Exp  {$$=mknode(MINUSONE,$2,NULL,NULL,yylineno);strcpy($$->type_id,"MINUSONE");}

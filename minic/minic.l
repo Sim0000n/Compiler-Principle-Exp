@@ -38,6 +38,10 @@ comment (\/\*(.|\n)*\*\/)|(\/\/.*)
 ","			{ return COMMA; }
 "--" 		{ return MINUSONE; }
 "++"		{ return PLUSONE; }
+"*="		{ return DMUL; printf("hehe\n"); }
+"+="		{ return DPLUS; }
+"-="		{ return DMIN; }
+"/="		{ return DDIV;}
 ">"|"<"|">="|"<="|"=="|"!=" { strcpy(yylval.type_id, yytext);;return RELOP; }
 "="			{ return ASSIGNOP; }
 "+"			{ return PLUS; }

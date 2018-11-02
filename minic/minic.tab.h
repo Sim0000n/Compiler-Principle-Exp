@@ -76,8 +76,12 @@ extern int yydebug;
     PLUSONE = 286,
     MINUSONE = 287,
     MOD = 288,
-    UMINUS = 289,
-    LOWER_THEN_ELSE = 290
+    DMUL = 289,
+    DPLUS = 290,
+    DMIN = 291,
+    DDIV = 292,
+    UMINUS = 293,
+    LOWER_THEN_ELSE = 294
   };
 #endif
 
@@ -93,7 +97,7 @@ union YYSTYPE
 	char   type_id[32];
 	struct node *ptr;
 
-#line 97 "minic.tab.h" /* yacc.c:1909  */
+#line 101 "minic.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

@@ -128,6 +128,10 @@ void display(struct node *T,int indent)  {//对抽象语法树的先根遍历
 	case PLUS:
 	case MINUS:
 	case STAR:
+    case DMUL:
+    case DPLUS:
+    case DDIV:
+    case DMIN:
 	case DIV:
                     printf("%*c%s\n",indent,' ',T->type_id);
                     display(T->ptr[0],indent+3);
