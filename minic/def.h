@@ -9,7 +9,7 @@ enum node_kind  {
     PARAM_LIST,PARAM_DEC, VAR_DEF,DEC_LIST,DEF_LIST,COMP_STM,
     STM_LIST,EXP_STMT,IF_THEN,IF_THEN_ELSE, FUNC_CALL,ARGS, 
     FUNCTION,PARAM,ARG,CALL,LABEL,GOTO,JLT,JLE,JGT,JGE,EQ,NEQ,
-    ARRAY_INDEX,ARRAY_ID};
+    ARRAY_INDEX,ARRAY_ID,ARRAY_DEC,ARRAY};
 #define MAXLENGTH   1000    //定义符号表的大小
 #define DX 3*sizeof(int)          //活动记录控制信息需要的单元数
 
@@ -51,6 +51,7 @@ struct node {    //以下对结点属性定义没有考虑存储效率，只是�
     int pos;                      //语法单位所在位置行号
     int offset;                    //偏移量
     int width;                    //占数据字节数
+    int array;
     };
 
 struct symbol {  //这里只列出了一个符号表项的部分属性，没考虑属性间的互斥
@@ -61,6 +62,7 @@ struct symbol {  //这里只列出了一个符号表项的部分属性，没考�
     char alias[10];      //别名，为解决嵌套层次使用，使得每一个数据名称唯一
     char flag;          //符号标记，函数：'F'  变量：'V'   参数：'P'  临时变量：'T'
     char offset;        //外部变量和局部变量在其静态数据区或活动记录中的偏移量
+    int array;
 				   //或函数活动记录大小，目标代码生成时使用
     //其它...
     };

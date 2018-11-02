@@ -19,7 +19,7 @@ void display(struct node *,int);
 	struct node *ptr;
 };
 
-%type  <ptr> program ExtDefList ExtDef  Specifier ExtDecList FuncDec CompSt VarList VarDec ParamDec Stmt StmList DefList Def DecList Dec Exp Args ArrayIndex
+%type  <ptr> program ExtDefList ExtDef  Specifier ExtDecList FuncDec CompSt VarList VarDec ParamDec Stmt StmList DefList Def DecList Dec Exp Args ArrayIndex ArrayDec 
 
 %token <type_int> INT              //指定INT的语义值是type_int，有词法分析得到的数值
 %token <type_id> ID RELOP TYPE  //指定ID,RELOP 的语义值是type_id，有词法分析得到的标识符字符串
@@ -47,7 +47,7 @@ void display(struct node *,int);
 %%
 
 program: ExtDefList    { 
-        display($1,0);  
+        // display($1,0);  
         semantic_Analysis0($1);
         }     /*显示语法树,语义分析 */
 
@@ -102,7 +102,10 @@ DecList: Dec  {$$=mknode(DEC_LIST,$1,NULL,NULL,yylineno);}
 	   ;
 Dec:     VarDec  {$$=$1;}
         | VarDec ASSIGNOP Exp  {$$=mknode(ASSIGNOP,$1,$3,NULL,yylineno);strcpy($$->type_id,"ASSIGNOP");}
+        | VarDec ASSIGNOP ArrayDec {$$=mknode(ASSIGNOP,$1,$3,NULL,yylineno);strcpy($$->type_id,"ASSIGNOP");}
        ;
+ArrayDec:  LC Args RC    {$$=mknode(ARRAY_DEC,$2,NULL,NULL,yylineno);}
+;
 Exp:    Exp ASSIGNOP Exp {$$=mknode(ASSIGNOP,$1,$3,NULL,yylineno);strcpy($$->type_id,"ASSIGNOP");}//$$结点type_id空置未用，正好存放运算符
       | Exp AND Exp   {$$=mknode(AND,$1,$3,NULL,yylineno);strcpy($$->type_id,"AND");}
       | Exp OR Exp    {$$=mknode(OR,$1,$3,NULL,yylineno);strcpy($$->type_id,"OR");}
@@ -125,11 +128,11 @@ Exp:    Exp ASSIGNOP Exp {$$=mknode(ASSIGNOP,$1,$3,NULL,yylineno);strcpy($$->typ
       | NOT Exp       {$$=mknode(NOT,$2,NULL,NULL,yylineno);strcpy($$->type_id,"NOT");}
       | ID LP Args RP {$$=mknode(FUNC_CALL,$3,NULL,NULL,yylineno);strcpy($$->type_id,$1);}
       | ID LP RP      {$$=mknode(FUNC_CALL,NULL,NULL,NULL,yylineno);strcpy($$->type_id,$1);}
-      | ID ArrayIndex {$$=mknode(ARRAY_ID,$2,NULL,NULL,yylineno);strcpy($$->type_id,$1);}
+      | ID ArrayIndex {$$=mknode(ARRAY,$2,NULL,NULL,yylineno);strcpy($$->type_id,$1);}
       | ID            {$$=mknode(ID,NULL,NULL,NULL,yylineno);strcpy($$->type_id,$1);}
       | INT           {$$=mknode(INT,NULL,NULL,NULL,yylineno);$$->type_int=$1;$$->type=INT;}
       | FLOAT         {$$=mknode(FLOAT,NULL,NULL,NULL,yylineno);$$->type_float=$1;$$->type=FLOAT;}
-      ;
+;
 Args:    Exp COMMA Args    {$$=mknode(ARGS,$1,$3,NULL,yylineno);}
        | Exp               {$$=mknode(ARGS,$1,NULL,NULL,yylineno);}
        ;
